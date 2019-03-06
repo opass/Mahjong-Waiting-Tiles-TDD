@@ -18,6 +18,8 @@ namespace MahjongReadyHand2
         [TestMethod]
         public void triplet_tiles_pass()
         {
+            var tiles = TileFactory.CreateTiles("D1,D1,D1");
+            new ComposedByTripletAndSequenceDecider(tiles).Check().Should().BeTrue();
         }
     }
 }

@@ -14,7 +14,7 @@ namespace MahjongReadyHand2
 
         public bool Check()
         {
-            return !_tiles.Any();
+            return !_tiles.Any() || _tiles.GroupBy(tile => tile).All(grp => grp.Count() == 3);
         }
     }
 }
