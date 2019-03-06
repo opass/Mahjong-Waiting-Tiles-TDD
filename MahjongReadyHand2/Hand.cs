@@ -42,14 +42,9 @@ namespace MahjongReadyHand2
                 return true;
             }
 
-            return DistinctTilesTakenEyes()
+            return new DistinctTilesTakenEyeGenerator(_tiles).GetAll()
                 .Select(tiles => new ComposedByTripletAndSequenceDecider(tiles).Check())
                 .Any(result => result);
-        }
-
-        private IEnumerable<IEnumerable<Tile>> DistinctTilesTakenEyes()
-        {
-            return Enumerable.Empty<IEnumerable<Tile>>();
         }
     }
 }
