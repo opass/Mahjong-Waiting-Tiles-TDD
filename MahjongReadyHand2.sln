@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MahjongReadyHand2", "MahjongReadyHand2\MahjongReadyHand2.csproj", "{57C71125-D3CC-4FAC-8275-8688D19195AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{57C71125-D3CC-4FAC-8275-8688D19195AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57C71125-D3CC-4FAC-8275-8688D19195AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57C71125-D3CC-4FAC-8275-8688D19195AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57C71125-D3CC-4FAC-8275-8688D19195AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
