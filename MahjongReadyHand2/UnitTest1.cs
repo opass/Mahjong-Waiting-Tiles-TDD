@@ -12,8 +12,8 @@ namespace MahjongReadyHand2
         [TestMethod]
         public void no_tiles_hand_is_waiting_for_no_tiles()
         {
-            var hand = new Hand();
-            var waitingTiles = hand.GetWaitingTiles();
+            GivenHand("");
+            var waitingTiles = _hand.GetWaitingTiles();
             waitingTiles.Should().BeEmpty();
         }
 

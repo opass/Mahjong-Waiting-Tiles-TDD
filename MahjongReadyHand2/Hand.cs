@@ -14,14 +14,9 @@ namespace MahjongReadyHand2
             _tilesString = tilesString;
         }
 
-        public Hand()
-        {
-            
-        }
-
         public IEnumerable<Tile> GetWaitingTiles()
         {
-            if (_tilesString != null)
+            if (_tilesString != "")
             {
                 return new[] {new Tile("")};
             }
