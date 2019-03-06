@@ -32,7 +32,7 @@ namespace MahjongReadyHand2
             }
             else
             {
-                waitingTiles.Should().Equals(new Tile(tilesString));
+                waitingTiles.Should().Equal(new Tile(tilesString));
             }
         }
 

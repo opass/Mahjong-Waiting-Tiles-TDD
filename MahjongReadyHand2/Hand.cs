@@ -18,7 +18,7 @@ namespace MahjongReadyHand2
         {
             if (_tilesString != "")
             {
-                return new[] {new Tile("")};
+                return new[] {new Tile(_tilesString)};
             }
             
             return Enumerable.Empty<Tile>();
