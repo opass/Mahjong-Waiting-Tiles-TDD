@@ -7,6 +7,8 @@ namespace MahjongReadyHand2
     [TestClass]
     public class HandTest
     {
+        private Hand _hand;
+
         [TestMethod]
         public void no_tiles_hand_is_waiting_for_no_tiles()
         {
@@ -18,16 +20,21 @@ namespace MahjongReadyHand2
         [TestMethod]
         public void one_tiles_hand_is_waiting_for_that_tile_D1()
         {
-            var hand = new Hand("D1");
-            var waitingTiles = hand.GetWaitingTiles();
+            GivenHand("D1");
+            var waitingTiles = _hand.GetWaitingTiles();
             waitingTiles.Should().Equals(new Tile("D1"));
+        }
+
+        private void GivenHand(string tilesString)
+        {
+            _hand = new Hand(tilesString);
         }
 
         [TestMethod]
         public void one_tiles_hand_is_waiting_for_that_tile_D2()
         {
-            var hand = new Hand("D2");
-            var waitingTiles = hand.GetWaitingTiles();
+            GivenHand("D2");
+            var waitingTiles = _hand.GetWaitingTiles();
             waitingTiles.Should().Equals(new Tile("D2"));
         }
     }
