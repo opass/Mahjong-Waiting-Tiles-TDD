@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,8 +11,13 @@ namespace MahjongReadyHand2
         [TestMethod]
         public void empty_tiles_case_pass()
         {
-            var emptyTiles = Enumerable.Empty<Tile>();
+            var emptyTiles = TileFactory.CreateTiles("");
             new ComposedByTripletAndSequenceDecider(emptyTiles).Check().Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void triplet_tiles_pass()
+        {
         }
     }
 }

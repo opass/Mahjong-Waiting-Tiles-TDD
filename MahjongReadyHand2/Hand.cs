@@ -11,8 +11,7 @@ namespace MahjongReadyHand2
 
         public Hand(string tilesString)
         {
-            _tiles = tilesString.Split(",", StringSplitOptions.RemoveEmptyEntries)
-                .Select(tileString => new Tile(tilesString));
+            _tiles = TileFactory.CreateTiles(tilesString);
         }
 
         public IEnumerable<Tile> GetWaitingTiles()
