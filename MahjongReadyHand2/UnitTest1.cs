@@ -22,5 +22,13 @@ namespace MahjongReadyHand2
             var waitingTiles = hand.GetWaitingTiles();
             waitingTiles.Should().Equals(new Tile("D1"));
         }
+
+        [TestMethod]
+        public void one_tiles_hand_is_waiting_for_that_tile_D2()
+        {
+            var hand = new Hand("D2");
+            var waitingTiles = hand.GetWaitingTiles();
+            waitingTiles.Should().Equals(new Tile("D2"));
+        }
     }
 }
