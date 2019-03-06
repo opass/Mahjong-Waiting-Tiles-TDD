@@ -1,16 +1,20 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MahjongReadyHand2
 {
     public class ComposedByTripletAndSequenceDecider
     {
+        private readonly IEnumerable<Tile> _tiles;
+
         public ComposedByTripletAndSequenceDecider(IEnumerable<Tile> tiles)
         {
+            _tiles = tiles;
         }
 
         public bool Check()
         {
-            return false;
+            return !_tiles.Any();
         }
     }
 }

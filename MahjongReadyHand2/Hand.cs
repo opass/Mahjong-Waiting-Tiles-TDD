@@ -36,12 +36,6 @@ namespace MahjongReadyHand2
 
         public bool IsWinning()
         {
-            var count = _tiles.Count();
-            if (count == 0 || count == 2)
-            {
-                return true;
-            }
-
             return new DistinctTilesTakenEyeGenerator(_tiles).GetAll()
                 .Select(tiles => new ComposedByTripletAndSequenceDecider(tiles).Check())
                 .Any(result => result);

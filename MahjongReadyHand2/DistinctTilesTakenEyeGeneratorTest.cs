@@ -39,5 +39,7 @@ namespace MahjongReadyHand2
             tilesCollection.Should().ContainSingle();
             tilesCollection.Single().Should().BeEmpty();
         }
+        
+        
     }
 }
