@@ -17,11 +17,32 @@ namespace MahjongReadyHand2
 
         public IEnumerable<Tile> GetWaitingTiles()
         {
-            if (_tiles.Count() == 2)
+            return PossibleWaitingTilesGenerator.PossibleWaitingTiles(_tiles)
+                .Select(tile =>
+                    (tile: tile, isWinning: new WinningDecider(_tiles.Append(tile)).IsWinning()))
+                .Where(tuple => tuple.isWinning)
+                .Select(tuple => tuple.tile);
+        }
+    }
+
+    public class WinningDecider
+    {
+        private readonly IEnumerable<Tile> _tiles;
+
+        public WinningDecider(IEnumerable<Tile> tiles)
+        {
+            _tiles = tiles;
+        }
+
+        public bool IsWinning()
+        {
+            var count = _tiles.Count();
+            if (count == 0 || count == 2)
             {
-                return Enumerable.Empty<Tile>();
+                return true;
             }
-            return _tiles;
+
+            return false;
         }
     }
 }
