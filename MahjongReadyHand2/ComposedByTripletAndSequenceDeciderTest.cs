@@ -14,13 +14,18 @@ namespace MahjongReadyHand2
         public void empty_tiles_case_pass()
         {
             GivenTiles("");
-            new ComposedByTripletAndSequenceDecider(_tiles).Check().Should().BeTrue();
+            ShouldComposedByTripletAndSequence();
         }
 
         [TestMethod]
         public void triplet_tiles_pass()
         {
             GivenTiles("D1,D1,D1");
+            ShouldComposedByTripletAndSequence();
+        }
+
+        private void ShouldComposedByTripletAndSequence()
+        {
             new ComposedByTripletAndSequenceDecider(_tiles).Check().Should().BeTrue();
         }
 
