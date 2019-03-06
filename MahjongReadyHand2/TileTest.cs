@@ -14,5 +14,14 @@ namespace MahjongReadyHand2
 
             tile1.Should().Be(tile2, "because they are same tile");
         }
+
+        [TestMethod]
+        public void different_tiles_are_not_equal()
+        {
+            var tile1 = new Tile("D1");
+            var tile2 = new Tile("D2");
+
+            tile1.Should().NotBe(tile2, "because they are different tile");
+        }
     }
 }
