@@ -9,8 +9,8 @@ namespace MahjongReadyHand2
         [TestMethod]
         public void same_tiles_are_equal()
         {
-            var tile1 = new Tile("D1");
-            var tile2 = new Tile("D1");
+            var tile1 = CreateTile("D1");
+            var tile2 = CreateTile("D1");
 
             tile1.Should().Be(tile2, "because they are same tile");
         }
@@ -18,10 +18,15 @@ namespace MahjongReadyHand2
         [TestMethod]
         public void different_tiles_are_not_equal()
         {
-            var tile1 = new Tile("D1");
-            var tile2 = new Tile("D2");
+            var tile1 = CreateTile("D1");
+            var tile2 = CreateTile("D2");
 
             tile1.Should().NotBe(tile2, "because they are different tile");
+        }
+
+        private static Tile CreateTile(string tileString)
+        {
+            return new Tile(tileString);
         }
     }
 }
