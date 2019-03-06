@@ -37,7 +37,6 @@ namespace MahjongReadyHand2
             WaitingTilesShouldBe("");
         }
 
-        [Ignore]
         [TestMethod]
         public void hand_type_D1114_is_waiting_for_D4()
         {

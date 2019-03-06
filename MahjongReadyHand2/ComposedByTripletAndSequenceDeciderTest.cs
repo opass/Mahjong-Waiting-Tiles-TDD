@@ -24,9 +24,28 @@ namespace MahjongReadyHand2
             ShouldComposedByTripletAndSequence();
         }
 
+        [TestMethod]
+        public void four_same_tiles_fail()
+        {
+            GivenTiles("D1,D1,D1,D1");
+            ShouldNotComposedByTripletAndSequence();
+        }
+
+        [TestMethod]
+        public void D144_should_fail()
+        {
+            GivenTiles("D1,D4,D4");
+            ShouldNotComposedByTripletAndSequence();
+        }
+
         private void ShouldComposedByTripletAndSequence()
         {
             new ComposedByTripletAndSequenceDecider(_tiles).Check().Should().BeTrue();
+        }
+
+        private void ShouldNotComposedByTripletAndSequence()
+        {
+            new ComposedByTripletAndSequenceDecider(_tiles).Check().Should().BeFalse();
         }
 
         private void GivenTiles(string tilesString)
