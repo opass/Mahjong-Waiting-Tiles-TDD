@@ -8,18 +8,25 @@ namespace MahjongReadyHand2
     [TestClass]
     public class ComposedByTripletAndSequenceDeciderTest
     {
+        private IEnumerable<Tile> _tiles;
+
         [TestMethod]
         public void empty_tiles_case_pass()
         {
-            var emptyTiles = TileFactory.CreateTiles("");
-            new ComposedByTripletAndSequenceDecider(emptyTiles).Check().Should().BeTrue();
+            GivenTiles("");
+            new ComposedByTripletAndSequenceDecider(_tiles).Check().Should().BeTrue();
         }
 
         [TestMethod]
         public void triplet_tiles_pass()
         {
-            var tiles = TileFactory.CreateTiles("D1,D1,D1");
-            new ComposedByTripletAndSequenceDecider(tiles).Check().Should().BeTrue();
+            GivenTiles("D1,D1,D1");
+            new ComposedByTripletAndSequenceDecider(_tiles).Check().Should().BeTrue();
+        }
+
+        private void GivenTiles(string tilesString)
+        {
+            _tiles = TileFactory.CreateTiles(tilesString);
         }
     }
 }
