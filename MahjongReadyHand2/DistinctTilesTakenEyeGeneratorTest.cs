@@ -41,7 +41,22 @@ namespace MahjongReadyHand2
             collection.Should().ContainSingle();
             collection.Single().Should().BeEmpty();
         }
-        
-        
+
+        [TestMethod]
+        public void D1114_should_return_collection_with_D14()
+        {
+            var tiles = new[]
+            {
+                new Tile("D1"),
+                new Tile("D1"),
+                new Tile("D1"),
+                new Tile("D4"),
+            };
+            
+            var tilesCollection = new DistinctTilesTakenEyeGenerator(tiles).GetAll();
+            var collection = tilesCollection as IEnumerable<Tile>[] ?? tilesCollection.ToArray();
+            collection.Should().ContainSingle();
+            collection.Single().Should().BeEquivalentTo(new Tile("D1"), new Tile("D4"));
+        }
     }
 }

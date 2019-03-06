@@ -14,12 +14,14 @@ internal class DistinctTilesTakenEyeGenerator
 
     public IEnumerable<IEnumerable<Tile>> GetAll()
     {
-        var groups = _tiles.GroupBy(tile => tile);
-        if (groups.Count() == 1 && groups.Single().Count() == 2)
-        {
-            return new [] {Enumerable.Empty<Tile>()};
-        }
+        var eyeTiles = _tiles.GroupBy(tile => tile).Where(grp => grp.Count() >= 2).Select(grp => grp.Key);
 
-        return Enumerable.Empty<IEnumerable<Tile>>();
+        return eyeTiles.Select(eyeTile =>
+        {
+            var tileList = _tiles.ToList();
+            tileList.Remove(eyeTile);
+            tileList.Remove(eyeTile);
+            return tileList;
+        });
     }
 }
