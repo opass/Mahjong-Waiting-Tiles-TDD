@@ -7,21 +7,21 @@ namespace MahjongReadyHand2
 {
     public class Hand
     {
-        private readonly string _tilesString;
+        private IEnumerable<Tile> _tiles;
 
         public Hand(string tilesString)
         {
-            _tilesString = tilesString;
+            _tiles = tilesString.Split(",", StringSplitOptions.RemoveEmptyEntries)
+                .Select(tileString => new Tile(tilesString));
         }
 
         public IEnumerable<Tile> GetWaitingTiles()
         {
-            if (_tilesString != "")
+            if (_tiles.Count() == 2)
             {
-                return new[] {new Tile(_tilesString)};
+                return Enumerable.Empty<Tile>();
             }
-            
-            return Enumerable.Empty<Tile>();
+            return _tiles;
         }
     }
 }
