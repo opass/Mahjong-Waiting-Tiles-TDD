@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -36,8 +37,9 @@ namespace MahjongReadyHand2
                 new Tile("D1"),
             };
             var tilesCollection = new DistinctTilesTakenEyeGenerator(tiles).GetAll();
-            tilesCollection.Should().ContainSingle();
-            tilesCollection.Single().Should().BeEmpty();
+            var collection = tilesCollection as IEnumerable<Tile>[] ?? tilesCollection.ToArray();
+            collection.Should().ContainSingle();
+            collection.Single().Should().BeEmpty();
         }
         
         
