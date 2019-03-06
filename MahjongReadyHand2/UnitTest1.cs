@@ -13,16 +13,27 @@ namespace MahjongReadyHand2
         public void no_tiles_hand_is_waiting_for_no_tiles()
         {
             GivenHand("");
-            var waitingTiles = _hand.GetWaitingTiles();
-            waitingTiles.Should().BeEmpty();
+            WaitingTilesShouldBe("");
         }
 
         [TestMethod]
         public void one_tiles_hand_is_waiting_for_that_tile_D1()
         {
             GivenHand("D1");
+            WaitingTilesShouldBe("D1");
+        }
+
+        private void WaitingTilesShouldBe(string tilesString)
+        {
             var waitingTiles = _hand.GetWaitingTiles();
-            waitingTiles.Should().Equals(new Tile("D1"));
+            if (tilesString == "")
+            {
+                waitingTiles.Should().BeEmpty();
+            }
+            else
+            {
+                waitingTiles.Should().Equals(new Tile(tilesString));
+            }
         }
 
         private void GivenHand(string tilesString)
@@ -34,8 +45,7 @@ namespace MahjongReadyHand2
         public void one_tiles_hand_is_waiting_for_that_tile_D2()
         {
             GivenHand("D2");
-            var waitingTiles = _hand.GetWaitingTiles();
-            waitingTiles.Should().Equals(new Tile("D2"));
+            WaitingTilesShouldBe("D2");
         }
     }
 }
