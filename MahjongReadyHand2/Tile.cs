@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace MahjongReadyHand2
 {
@@ -20,6 +21,11 @@ namespace MahjongReadyHand2
 
         public Tile(Suit suit, int rank)
         {
+            if (!(1 <= rank && rank <= 9))
+            {
+                throw new ArgumentException("Rank should be between 1 to 9");
+            }
+            
             Rank = rank;
             Suit = suit;
             _tileString = $"{_suitStringMap[suit]}{rank}";
@@ -42,12 +48,23 @@ namespace MahjongReadyHand2
             return _tileString.GetHashCode();
         }
 
-        public Tile Next()
+        public Tile NextRankTile()
         {
-            return new Tile(Suit, Rank + 1);
+            var nextRank = Rank + 1;
+            if (nextRank <= 9)
+            {
+                return new Tile(Suit, nextRank);
+            }
+
+            throw new InvalidOperationException();
         }
 
         public Suit Suit { get; }
+
+        public virtual bool IsValid()
+        {
+            return false;
+        }
     }
 
     public enum Suit

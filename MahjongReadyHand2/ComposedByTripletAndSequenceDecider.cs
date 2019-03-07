@@ -27,14 +27,17 @@ namespace MahjongReadyHand2
             }
 
             var smallestTile = GetSmallestTile();
-            var secondTile = smallestTile.Next();
-            var thirdTile = secondTile.Next();
-
-            if (_tiles.Intersect(new [] {smallestTile, secondTile, thirdTile}).Count() == 3)
+            if (smallestTile.Rank <= 7)
             {
-                return true;
-            }
+                var secondTile = smallestTile.NextRankTile();
+                var thirdTile = secondTile.NextRankTile();
 
+                if (_tiles.Intersect(new[] {smallestTile, secondTile, thirdTile}).Count() == 3)
+                {
+                    return true;
+                }
+            }
+                
             return false;
         }
 
