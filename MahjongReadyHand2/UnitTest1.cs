@@ -65,7 +65,6 @@ namespace MahjongReadyHand2
             WaitingTilesShouldBe("D2,D3");
         }
 
-        [Ignore]
         [TestMethod]
         public void hand_type_D4677_is_waiting_for_D5()
         {
