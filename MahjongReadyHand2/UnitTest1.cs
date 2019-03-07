@@ -72,6 +72,13 @@ namespace MahjongReadyHand2
             WaitingTilesShouldBe("D1");
         }
 
+        [TestMethod]
+        public void hand_type_D1236669_is_waiting_for_D9()
+        {
+            GivenHand("D1,D2,D3,D6,D6,D6,D9");
+            WaitingTilesShouldBe("D9");
+        }
+
 
         private void WaitingTilesShouldBe(string tilesString)
         {
