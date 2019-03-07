@@ -19,16 +19,6 @@ namespace MahjongReadyHand2
             return Enumerable.Repeat(tile, 3);
         }
 
-        public static bool CanCreateSequence(Tile tile)
-        {
-            return 1 <= tile.Rank && tile.Rank <= 7;
-        }
-
-        public static IEnumerable<Tile> CreateSequence(Tile firstTile)
-        {
-            return new [] {firstTile, firstTile.NextRankTile(), firstTile.NextRankTile().NextRankTile()};
-        }
-        
         public static bool TryCreateSequence(Tile firstTile, out IEnumerable<Tile> tiles)
         {
             try

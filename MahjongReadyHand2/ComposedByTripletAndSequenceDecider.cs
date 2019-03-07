@@ -35,7 +35,7 @@ namespace MahjongReadyHand2
         {
             try
             {
-                tile =  _tileCounter.First().Key;
+                tile = _tileCounter.First().Key;
                 return true;
             }
             catch
