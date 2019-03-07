@@ -48,5 +48,12 @@ namespace MahjongReadyHand2
             _possibleWaitingTiles = CalculatePossibleWaitingTiles(tiles);
             _possibleWaitingTiles.Should().OnlyHaveUniqueItems();
         }
+
+        [TestMethod]
+        public void possible_waiting_tiles_should_include_sibling()
+        {
+            _possibleWaitingTiles = CalculatePossibleWaitingTiles(TileFactory.CreateTiles("D2,D3"));
+            _possibleWaitingTiles.Should().Contain(TileFactory.CreateTiles("D1,D4"));
+        }
     }
 }

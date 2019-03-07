@@ -65,12 +65,20 @@ namespace MahjongReadyHand2
             WaitingTilesShouldBe("D2,D3");
         }
 
+        [Ignore]
+        [TestMethod]
+        public void hand_type_D4677_is_waiting_for_D5()
+        {
+            GivenHand("D4,D6,D7,D7");
+            WaitingTilesShouldBe("D5");
+        }
+
 
         private void WaitingTilesShouldBe(string tilesString)
         {
             var waitingTiles = _hand.GetWaitingTiles();
             var expectedTiles = TileFactory.CreateTiles(tilesString);
-            expectedTiles.Should().BeEquivalentTo(waitingTiles);
+            waitingTiles.Should().BeEquivalentTo(expectedTiles);
         }
 
         private void GivenHand(string tilesString)

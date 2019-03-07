@@ -65,6 +65,17 @@ namespace MahjongReadyHand2
         {
             return false;
         }
+
+        public Tile PreviousRankTile()
+        {
+            var nextRank = Rank - 1;
+            if (nextRank >= 1)
+            {
+                return new Tile(Suit, nextRank);
+            }
+
+            throw new InvalidOperationException();
+        }
     }
 
     public enum Suit
