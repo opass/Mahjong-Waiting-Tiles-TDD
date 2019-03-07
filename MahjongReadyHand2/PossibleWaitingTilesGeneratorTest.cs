@@ -43,6 +43,13 @@ namespace MahjongReadyHand2
             _possibleWaitingTiles.Should().Contain(TileFactory.CreateTiles("D1,D4"));
         }
 
+        [TestMethod]
+        public void possible_waiting_tiles_should_exclude_4_tiles()
+        {
+            CalculateWaitingTiles("D3,D3,D3,D3");
+            _possibleWaitingTiles.Should().NotContain(TileFactory.CreateTiles("D3"));
+        }
+
         private void CalculateWaitingTiles(string tiles)
         {
             _possibleWaitingTiles = CalculatePossibleWaitingTiles(TileFactory.CreateTiles(tiles));

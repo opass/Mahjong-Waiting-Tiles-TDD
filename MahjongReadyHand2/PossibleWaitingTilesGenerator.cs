@@ -7,10 +7,12 @@ internal static class PossibleWaitingTilesGenerator
 {
     public static IEnumerable<Tile> PossibleWaitingTiles(IEnumerable<Tile> tiles)
     {
-        return tiles.Distinct().SelectMany(tile =>
+        var enumerable = tiles.ToList();
+        var quadrupletTiles = enumerable.GroupBy(tile => tile).Where(grp => grp.Count() == 4).Select(grp => grp.Key);
+
+        return enumerable.Distinct().SelectMany(tile =>
         {
-            var tilesAndSibling = new List<Tile>();
-            tilesAndSibling.Add(tile);
+            var tilesAndSibling = new List<Tile> {tile};
 
             if (tile.Rank != 1)
             {
@@ -23,6 +25,6 @@ internal static class PossibleWaitingTilesGenerator
             }
 
             return tilesAndSibling;
-        }).Distinct();
+        }).Except(quadrupletTiles);
     }
 }
