@@ -15,24 +15,33 @@ namespace MahjongReadyHand2
             InitializeTileCounter(tiles);
 
 
-            bool keepTry = true;
-            while (!IsEmpty() && keepTry)
+            var tryAgain = true;
+            while (TryGetSmallestRankTile(out var tile1) && tryAgain)
             {
-                var smallestTile = GetSmallestRankTile();
-                var triplet = TileFactory.CreateTriplet(smallestTile);
-                keepTry = TryRemoveAllOrNot(triplet);
+                var tripletRemoved = TryRemoveAllOrNot(TileFactory.CreateTriplet(tile1));
+                tryAgain = tripletRemoved;
 
-                if (IsEmpty()) break;
-                
-                smallestTile = GetSmallestRankTile();
-                if (TileFactory.CanCreateSequence(smallestTile))
-                {
-                    var sequence = TileFactory.CreateSequence(smallestTile);
-                    keepTry = keepTry || TryRemoveAllOrNot(sequence);
-                }
+                if (!TryGetSmallestRankTile(out var tile2)) break;
+                if (!TileFactory.CanCreateSequence(tile2)) continue;
+                var sequenceRemoved = TryRemoveAllOrNot(TileFactory.CreateSequence(tile2));
+                tryAgain = tripletRemoved || sequenceRemoved;
             }
 
             return IsEmpty();
+        }
+
+        private bool TryGetSmallestRankTile(out Tile tile)
+        {
+            try
+            {
+                tile =  _tileCounter.First().Key;
+                return true;
+            }
+            catch
+            {
+                tile = default(Tile);
+                return false;
+            }
         }
 
 
@@ -43,7 +52,6 @@ namespace MahjongReadyHand2
             if (!AllTilesExist(tileList)) return false;
             RemoveExistingTiles(tileList);
             return true;
-
         }
 
         private void RemoveExistingTiles(IEnumerable<Tile> tileList)
