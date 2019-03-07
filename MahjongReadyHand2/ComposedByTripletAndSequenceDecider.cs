@@ -78,11 +78,6 @@ namespace MahjongReadyHand2
             return !_tileCounter.Any();
         }
 
-        private Tile GetSmallestRankTile()
-        {
-            return _tileCounter.First().Key;
-        }
-
         private void RemoveExistingTile(Tile target)
         {
             if ((_tileCounter[target] -= 1) == 0)
