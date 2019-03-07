@@ -18,11 +18,6 @@ namespace MahjongReadyHand2
 
         public bool Check()
         {
-            if (!_tiles.Any())
-            {
-                return true;
-            }
-
             CalculateTileCounter();
 
             while (TryRemoveTriplet())
@@ -35,12 +30,7 @@ namespace MahjongReadyHand2
                 // empty
             }
 
-            if (!_tileCounter.Any())
-            {
-                return true;
-            }
-
-            return false;
+            return !_tileCounter.Any();
         }
 
         private bool TryRemoveSequence()
