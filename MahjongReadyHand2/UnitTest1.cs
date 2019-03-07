@@ -52,13 +52,6 @@ namespace MahjongReadyHand2
         }
 
         [TestMethod]
-        public void hand_type_D1444789_is_waiting_for_D1()
-        {
-            GivenHand("D1,D4,D4,D4,D7,D8,D9");
-            WaitingTilesShouldBe("D1");
-        }
-
-        [TestMethod]
         public void hand_type_D2233_is_waiting_for_D23()
         {
             GivenHand("D2,D2,D3,D3");
@@ -70,6 +63,13 @@ namespace MahjongReadyHand2
         {
             GivenHand("D4,D6,D7,D7");
             WaitingTilesShouldBe("D5");
+        }
+
+        [TestMethod]
+        public void hand_type_D1444789_is_waiting_for_D1()
+        {
+            GivenHand("D1,D4,D4,D4,D7,D8,D9");
+            WaitingTilesShouldBe("D1");
         }
 
 
