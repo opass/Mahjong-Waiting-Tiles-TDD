@@ -38,14 +38,7 @@ namespace MahjongReadyHand2
 
         private bool TryRemoveAllOrNot(IEnumerable<Tile> tiles)
         {
-            var allExist = tiles.GroupBy(tile => tile).All(grp =>
-            {
-                var tile = grp.Key;
-                var count = grp.Count();
-                return _tileCounter.ContainsKey(tile) && _tileCounter[tile] >= count;
-            });
-
-            if (!allExist) return false;
+            if (!AllTilesExist(tiles)) return false;
 
             foreach (var tile in tiles)
             {
@@ -53,6 +46,17 @@ namespace MahjongReadyHand2
             }
 
             return true;
+        }
+
+        private bool AllTilesExist(IEnumerable<Tile> tiles)
+        {
+            var allExist = tiles.GroupBy(tile => tile).All(grp =>
+            {
+                var tile = grp.Key;
+                var count = grp.Count();
+                return _tileCounter.ContainsKey(tile) && _tileCounter[tile] >= count;
+            });
+            return allExist;
         }
 
         private bool IsEmpty()
