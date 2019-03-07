@@ -61,20 +61,19 @@ namespace MahjongReadyHand2
                 return false;
             }
 
-            if ((_tileCounter[sequenceTiles.first] -= 1) == 0)
-            {
-                _tileCounter.Remove(sequenceTiles.first);
-            }
-            if ((_tileCounter[sequenceTiles.second] -= 1) == 0)
-            {
-                _tileCounter.Remove(sequenceTiles.second);
-            }
-            if ((_tileCounter[sequenceTiles.third] -= 1) == 0)
-            {
-                _tileCounter.Remove(sequenceTiles.third);
-            }
+            RemoveExistingTileWithTimes(sequenceTiles.first, 1);
+            RemoveExistingTileWithTimes(sequenceTiles.second, 1);
+            RemoveExistingTileWithTimes(sequenceTiles.third, 1);
 
             return true;
+        }
+
+        private void RemoveExistingTile(Tile target)
+        {
+            if ((_tileCounter[target] -= 1) == 0)
+            {
+                _tileCounter.Remove(target);
+            }
         }
 
         private bool TryRemoveTriplet()
@@ -91,12 +90,17 @@ namespace MahjongReadyHand2
 
             var tile = tripletKVP.Key;
 
-            if ((_tileCounter[tile] -= 3) == 0)
-            {
-                _tileCounter.Remove(tile);
-            }
+            RemoveExistingTileWithTimes(tile, 3);
 
             return true;
+        }
+
+        private void RemoveExistingTileWithTimes(Tile tile, int times)
+        {
+            for (var i = 0; i < times; i++)
+            {
+                RemoveExistingTile(tile);
+            }
         }
 
         private void CalculateTileCounter()
