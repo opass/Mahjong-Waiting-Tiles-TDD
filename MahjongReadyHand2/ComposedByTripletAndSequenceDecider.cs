@@ -9,7 +9,7 @@ namespace MahjongReadyHand2
     public class ComposedByTripletAndSequenceDecider
     {
         private readonly IEnumerable<Tile> _tiles;
-        private Dictionary<Tile, int> _tileCounter;
+        private SortedDictionary<Tile, int> _tileCounter;
 
         public ComposedByTripletAndSequenceDecider(IEnumerable<Tile> tiles)
         {
@@ -20,17 +20,54 @@ namespace MahjongReadyHand2
         {
             CalculateTileCounter();
 
-            while (TryRemoveSequence())
+
+            bool keepTry = true;
+            while (!IsEmpty() && keepTry)
             {
-                // empty
+                var smallestTile = GetSmallestRankTile();
+                var triplet = TileFactory.CreateTriplet(smallestTile);
+                keepTry = TryRemoveAllOrNot(triplet);
+
+                if (IsEmpty()) break;
+                
+                smallestTile = GetSmallestRankTile();
+                if (TileFactory.CanCreateSequence(smallestTile))
+                {
+                    var sequence = TileFactory.CreateSequence(smallestTile);
+                    keepTry = keepTry || TryRemoveAllOrNot(sequence);
+                }
             }
 
-            while (TryRemoveTriplet())
+            return IsEmpty();
+        }
+
+        private bool TryRemoveAllOrNot(IEnumerable<Tile> tiles)
+        {
+            var allExist = tiles.GroupBy(tile => tile).All(grp =>
             {
-                // empty
+                var tile = grp.Key;
+                var count = grp.Count();
+                return _tileCounter.ContainsKey(tile) && _tileCounter[tile] >= count;
+            });
+
+            if (!allExist) return false;
+
+            foreach (var tile in tiles)
+            {
+                RemoveExistingTile(tile);
             }
 
+            return true;
+        }
+
+        private bool IsEmpty()
+        {
             return !_tileCounter.Any();
+        }
+
+        private Tile GetSmallestRankTile()
+        {
+            return _tileCounter.First().Key;
         }
 
         private bool TryRemoveSequence()
@@ -95,7 +132,10 @@ namespace MahjongReadyHand2
 
         private void CalculateTileCounter()
         {
-            _tileCounter = _tiles.GroupBy(tile => tile).ToDictionary(grp => grp.Key, grp => grp.Count());
+            _tileCounter =
+                new SortedDictionary<Tile, int>(
+                    _tiles.GroupBy(tile => tile).ToDictionary(grp => grp.Key, grp => grp.Count()),
+                    new TileRankComparer());
         }
     }
 }
