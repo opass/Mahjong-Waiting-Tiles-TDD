@@ -24,6 +24,15 @@ namespace MahjongReadyHand2
             tile1.Should().NotBe(tile2, "because they are different tile");
         }
 
+        [TestMethod]
+        public void can_create_bamboo_tile()
+        {
+            var tile1 = CreateTile("B1");
+
+            tile1.Rank.Should().Be(1);
+            tile1.Suit.Should().Be(Suit.Bamboo);
+        }
+
         private static Tile CreateTile(string tileString)
         {
             return new Tile(tileString);

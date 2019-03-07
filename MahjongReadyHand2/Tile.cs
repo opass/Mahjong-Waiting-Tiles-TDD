@@ -6,17 +6,15 @@ namespace MahjongReadyHand2
 {
     public class Tile
     {
-        private readonly string _tileString;
-
-        private Dictionary<Suit, string> _suitStringMap = new Dictionary<Suit, string>
+        private Dictionary<string, Suit> _suitParsingTable = new Dictionary<string, Suit>
         {
-            {Suit.Dot, "D"}
+            {"D", Suit.Dot},
+            {"B", Suit.Bamboo}
         };
-
         public Tile(string tileString)
         {
-            _tileString = tileString;
-            Rank = int.Parse(_tileString.Substring(1, 1));
+            Suit = _suitParsingTable[tileString.Substring(0, 1)];
+            Rank = int.Parse(tileString.Substring(1, 1));
         }
 
         public Tile(Suit suit, int rank)
@@ -28,7 +26,6 @@ namespace MahjongReadyHand2
             
             Rank = rank;
             Suit = suit;
-            _tileString = $"{_suitStringMap[suit]}{rank}";
         }
 
         public int Rank { get; }
@@ -40,12 +37,18 @@ namespace MahjongReadyHand2
 
         public bool Equals(Tile other)
         {
-            return _tileString == other._tileString;
+            return Suit == other.Suit && Rank == other.Rank;
         }
 
         public override int GetHashCode()
         {
-            return _tileString.GetHashCode();
+            unchecked
+            {
+                var hash = 31;
+                hash = hash * 23 + Rank.GetHashCode();
+                hash = hash * 23 + Suit.GetHashCode();
+                return hash;
+            }
         }
 
         public Tile NextRankTile()
@@ -81,5 +84,6 @@ namespace MahjongReadyHand2
     public enum Suit
     {
         Dot,
+        Bamboo
     }
 }
