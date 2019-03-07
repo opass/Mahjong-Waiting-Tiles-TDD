@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 
 namespace MahjongReadyHand2
@@ -22,8 +23,8 @@ namespace MahjongReadyHand2
                 tryAgain = tripletRemoved;
 
                 if (!TryGetSmallestRankTile(out var tile2)) break;
-                if (!TileFactory.CanCreateSequence(tile2)) continue;
-                var sequenceRemoved = TryRemoveAllOrNot(TileFactory.CreateSequence(tile2));
+                if (!TileFactory.TryCreateSequence(tile2, out var sequence)) continue;
+                var sequenceRemoved = TryRemoveAllOrNot(sequence);
                 tryAgain = tripletRemoved || sequenceRemoved;
             }
 

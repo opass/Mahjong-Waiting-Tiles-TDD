@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace MahjongReadyHand2
 {
@@ -26,5 +28,20 @@ namespace MahjongReadyHand2
         {
             return new [] {firstTile, firstTile.NextRankTile(), firstTile.NextRankTile().NextRankTile()};
         }
+        
+        public static bool TryCreateSequence(Tile firstTile, out IEnumerable<Tile> tiles)
+        {
+            try
+            {
+                tiles = new[] {firstTile, firstTile.NextRankTile(), firstTile.NextRankTile().NextRankTile()};
+                return true;
+            }
+            catch
+            {
+                tiles = default(IEnumerable<Tile>);
+                return false;
+            }
+        }
+        
     }
 }
