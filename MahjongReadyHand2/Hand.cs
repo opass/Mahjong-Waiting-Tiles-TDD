@@ -36,7 +36,7 @@ namespace MahjongReadyHand2
         public bool Check()
         {
             return new DistinctTilesTakenEyeGenerator(_tiles).GetAll()
-                .Select(tiles => new ComposedByTripletAndSequenceDecider(tiles).Check())
+                .Select(tiles => new ComposedByTripletAndSequenceDecider().Check(tiles))
                 .Any(result => result);
         }
     }

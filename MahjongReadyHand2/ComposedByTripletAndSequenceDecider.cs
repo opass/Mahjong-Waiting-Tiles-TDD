@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -7,16 +8,12 @@ namespace MahjongReadyHand2
 {
     public class ComposedByTripletAndSequenceDecider
     {
-        private readonly IEnumerable<Tile> _tiles;
+        private IEnumerable<Tile> _tiles;
         private SortedDictionary<Tile, int> _tileCounter;
 
-        public ComposedByTripletAndSequenceDecider(IEnumerable<Tile> tiles)
+        public bool Check(IEnumerable<Tile> tiles)
         {
             _tiles = tiles;
-        }
-
-        public bool Check()
-        {
             CalculateTileCounter();
 
 
@@ -39,6 +36,7 @@ namespace MahjongReadyHand2
 
             return IsEmpty();
         }
+
 
         private bool TryRemoveAllOrNot(IEnumerable<Tile> tiles)
         {

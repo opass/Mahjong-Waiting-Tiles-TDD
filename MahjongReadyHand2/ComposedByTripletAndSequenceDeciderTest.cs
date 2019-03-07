@@ -61,12 +61,12 @@ namespace MahjongReadyHand2
 
         private void ShouldComposedByTripletAndSequence()
         {
-            new ComposedByTripletAndSequenceDecider(_tiles).Check().Should().BeTrue();
+            new ComposedByTripletAndSequenceDecider().Check(_tiles).Should().BeTrue();
         }
 
         private void ShouldNotComposedByTripletAndSequence()
         {
-            new ComposedByTripletAndSequenceDecider(_tiles).Check().Should().BeFalse();
+            new ComposedByTripletAndSequenceDecider().Check(_tiles).Should().BeFalse();
         }
 
         private void GivenTiles(string tilesString)
