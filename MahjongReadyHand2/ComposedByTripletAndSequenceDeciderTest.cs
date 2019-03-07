@@ -45,6 +45,13 @@ namespace MahjongReadyHand2
             ShouldComposedByTripletAndSequence();
         }
 
+        [TestMethod]
+        public void D889_should_fail()
+        {
+            GivenTiles("D8,D8,D9");
+            ShouldNotComposedByTripletAndSequence();
+        }
+
         private void ShouldComposedByTripletAndSequence()
         {
             new ComposedByTripletAndSequenceDecider(_tiles).Check().Should().BeTrue();
