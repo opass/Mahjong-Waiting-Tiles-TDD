@@ -38,6 +38,13 @@ namespace MahjongReadyHand2
             ShouldNotComposedByTripletAndSequence();
         }
 
+        [TestMethod]
+        public void D123_should_pass()
+        {
+            GivenTiles("D1,D2,D3");
+            ShouldComposedByTripletAndSequence();
+        }
+
         private void ShouldComposedByTripletAndSequence()
         {
             new ComposedByTripletAndSequenceDecider(_tiles).Check().Should().BeTrue();
