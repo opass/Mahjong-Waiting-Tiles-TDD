@@ -38,14 +38,20 @@ namespace MahjongReadyHand2
 
         private bool TryRemoveAllOrNot(IEnumerable<Tile> tiles)
         {
-            if (!AllTilesExist(tiles)) return false;
+            var tileList = tiles.ToList();
 
-            foreach (var tile in tiles)
+            if (!AllTilesExist(tileList)) return false;
+            RemoveExistingTiles(tileList);
+            return true;
+
+        }
+
+        private void RemoveExistingTiles(IEnumerable<Tile> tileList)
+        {
+            foreach (var tile in tileList)
             {
                 RemoveExistingTile(tile);
             }
-
-            return true;
         }
 
         private bool AllTilesExist(IEnumerable<Tile> tiles)
