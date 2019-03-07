@@ -20,12 +20,12 @@ namespace MahjongReadyHand2
         {
             CalculateTileCounter();
 
-            while (TryRemoveTriplet())
+            while (TryRemoveSequence())
             {
                 // empty
             }
 
-            while (TryRemoveSequence())
+            while (TryRemoveTriplet())
             {
                 // empty
             }
