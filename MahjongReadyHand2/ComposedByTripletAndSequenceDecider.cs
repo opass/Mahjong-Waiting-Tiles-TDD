@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
@@ -8,6 +9,7 @@ namespace MahjongReadyHand2
     public class ComposedByTripletAndSequenceDecider
     {
         private readonly IEnumerable<Tile> _tiles;
+        private Dictionary<Tile, int> _tileCounter;
 
         public ComposedByTripletAndSequenceDecider(IEnumerable<Tile> tiles)
         {
@@ -21,29 +23,85 @@ namespace MahjongReadyHand2
                 return true;
             }
 
-            if (_tiles.GroupBy(tile => tile).All(grp => grp.Count() == 3))
+            CalculateTileCounter();
+
+            while (TryRemoveTriplet())
+            {
+                // empty
+            }
+
+            while (TryRemoveSequence())
+            {
+                // empty
+            }
+
+            if (!_tileCounter.Any())
             {
                 return true;
             }
 
-            var smallestTile = GetSmallestTile();
-            if (smallestTile.Rank <= 7)
-            {
-                var secondTile = smallestTile.NextRankTile();
-                var thirdTile = secondTile.NextRankTile();
-
-                if (_tiles.Intersect(new[] {smallestTile, secondTile, thirdTile}).Count() == 3)
-                {
-                    return true;
-                }
-            }
-                
             return false;
         }
 
-        private Tile GetSmallestTile()
+        private bool TryRemoveSequence()
         {
-            return _tiles.OrderBy(tile => tile, new TileRankComparer()).First();
+            (Tile first, Tile second, Tile third) sequenceTiles;
+            try
+            {
+                sequenceTiles = _tileCounter.Where(kvp => kvp.Key.Rank <= 7).Select(kvp =>
+                {
+                    var firstTile = kvp.Key;
+                    var secondTile = firstTile.NextRankTile();
+                    var thirdTile = secondTile.NextRankTile();
+                    return (first: firstTile, second: secondTile, third: thirdTile);
+                }).First(tuple => _tileCounter.ContainsKey(tuple.second) && _tileCounter.ContainsKey(tuple.third));
+            }
+            catch (InvalidOperationException)
+            {
+                return false;
+            }
+
+            if ((_tileCounter[sequenceTiles.first] -= 1) == 0)
+            {
+                _tileCounter.Remove(sequenceTiles.first);
+            }
+            if ((_tileCounter[sequenceTiles.second] -= 1) == 0)
+            {
+                _tileCounter.Remove(sequenceTiles.second);
+            }
+            if ((_tileCounter[sequenceTiles.third] -= 1) == 0)
+            {
+                _tileCounter.Remove(sequenceTiles.third);
+            }
+
+            return true;
+        }
+
+        private bool TryRemoveTriplet()
+        {
+            KeyValuePair<Tile, int> tripletKVP;
+            try
+            {
+                tripletKVP = _tileCounter.First(kvp => kvp.Value >= 3);
+            }
+            catch (InvalidOperationException)
+            {
+                return false;
+            }
+
+            var tile = tripletKVP.Key;
+
+            if ((_tileCounter[tile] -= 3) == 0)
+            {
+                _tileCounter.Remove(tile);
+            }
+
+            return true;
+        }
+
+        private void CalculateTileCounter()
+        {
+            _tileCounter = _tiles.GroupBy(tile => tile).ToDictionary(grp => grp.Key, grp => grp.Count());
         }
     }
 }
