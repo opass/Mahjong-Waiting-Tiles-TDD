@@ -8,13 +8,11 @@ namespace MahjongReadyHand2
 {
     public class ComposedByTripletAndSequenceDecider
     {
-        private IEnumerable<Tile> _tiles;
         private SortedDictionary<Tile, int> _tileCounter;
 
         public bool Check(IEnumerable<Tile> tiles)
         {
-            _tiles = tiles;
-            CalculateTileCounter();
+            CalculateTileCounter(tiles);
 
 
             bool keepTry = true;
@@ -75,11 +73,11 @@ namespace MahjongReadyHand2
             }
         }
 
-        private void CalculateTileCounter()
+        private void CalculateTileCounter(IEnumerable<Tile> tiles)
         {
             _tileCounter =
                 new SortedDictionary<Tile, int>(
-                    _tiles.GroupBy(tile => tile).ToDictionary(grp => grp.Key, grp => grp.Count()),
+                    tiles.GroupBy(tile => tile).ToDictionary(grp => grp.Key, grp => grp.Count()),
                     new TileRankComparer());
         }
     }
