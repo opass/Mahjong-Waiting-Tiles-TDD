@@ -65,13 +65,12 @@ namespace MahjongReadyHand2
 
         private bool AllTilesExist(IEnumerable<Tile> tiles)
         {
-            var allExist = tiles.GroupBy(tile => tile).All(grp =>
+            return tiles.GroupBy(tile => tile).All(grp =>
             {
                 var tile = grp.Key;
                 var count = grp.Count();
                 return _tileCounter.ContainsKey(tile) && _tileCounter[tile] >= count;
             });
-            return allExist;
         }
 
         private bool IsEmpty()
