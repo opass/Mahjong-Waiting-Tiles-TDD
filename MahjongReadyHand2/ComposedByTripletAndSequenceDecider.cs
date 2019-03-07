@@ -12,7 +12,7 @@ namespace MahjongReadyHand2
 
         public bool Check(IEnumerable<Tile> tiles)
         {
-            CalculateTileCounter(tiles);
+            InitializeTileCounter(tiles);
 
 
             bool keepTry = true;
@@ -73,7 +73,7 @@ namespace MahjongReadyHand2
             }
         }
 
-        private void CalculateTileCounter(IEnumerable<Tile> tiles)
+        private void InitializeTileCounter(IEnumerable<Tile> tiles)
         {
             _tileCounter =
                 new SortedDictionary<Tile, int>(
