@@ -27,12 +27,17 @@ namespace MahjongReadyHand2
             Suit = SuitParsingTable[tileString.Substring(0, 1)];
             if (IsWind())
                 Rank = 0;
-            else if (Suit == Suit.RedDragon || Suit == Suit.GreenDragon || Suit == Suit.WhiteDragon)
+            else if (IsDragon())
             {
                 Rank = 0;
             }
             else
                 Rank = int.Parse(tileString.Substring(1, 1));
+        }
+
+        private bool IsDragon()
+        {
+            return Suit == Suit.RedDragon || Suit == Suit.GreenDragon || Suit == Suit.WhiteDragon;
         }
 
         public Tile(Suit suit, int rank)
