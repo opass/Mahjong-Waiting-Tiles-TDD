@@ -6,6 +6,8 @@ namespace MahjongReadyHand2
     [TestClass]
     public class TileTest
     {
+        private Tile _tile;
+
         [TestMethod]
         public void same_tiles_are_equal()
         {
@@ -54,20 +56,28 @@ namespace MahjongReadyHand2
         [TestMethod]
         public void can_create_wind_tile()
         {
-            var northWind = CreateTile("N");
-            var eastWind = CreateTile("E");
-            var westWind = CreateTile("W");
-            var southWind = CreateTile("S");
+            GivenTile("N");
+            SuitAndRankShouldBe(Suit.North, 0);
 
-            northWind.Rank.Should().Be(0);
-            eastWind.Rank.Should().Be(0);
-            westWind.Rank.Should().Be(0);
-            southWind.Rank.Should().Be(0);
+            GivenTile("E");
+            SuitAndRankShouldBe(Suit.East, 0);
             
-            northWind.Suit.Should().Be(Suit.North);
-            eastWind.Suit.Should().Be(Suit.East);
-            westWind.Suit.Should().Be(Suit.West);
-            southWind.Suit.Should().Be(Suit.South);
+            GivenTile("W");
+            SuitAndRankShouldBe(Suit.West, 0);
+            
+            GivenTile("S");
+            SuitAndRankShouldBe(Suit.South, 0);
+        }
+
+        private void SuitAndRankShouldBe(Suit expectedSuit, int expectedRank)
+        {
+            _tile.Suit.Should().Be(expectedSuit);
+            _tile.Rank.Should().Be(expectedRank);
+        }
+
+        private void GivenTile(string tile)
+        {
+            _tile = CreateTile(tile);
         }
 
         private static Tile CreateTile(string tileString)
