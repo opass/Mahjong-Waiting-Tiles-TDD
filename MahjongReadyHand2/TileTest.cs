@@ -70,6 +70,20 @@ namespace MahjongReadyHand2
             SuitAndRankShouldBe(Suit.RedDragon, 0);
         }
 
+        [TestMethod]
+        public void can_create_green_dragon_tile()
+        {
+            GivenTile("G");
+            SuitAndRankShouldBe(Suit.GreenDragon, 0);
+        }
+
+        [TestMethod]
+        public void can_create_white_dragon_tile()
+        {
+            GivenTile("Z");  // choose Z Because W already been represented by West Wind
+            SuitAndRankShouldBe(Suit.WhiteDragon, 0);
+        }
+
         private void SuitAndRankShouldBe(Suit expectedSuit, int expectedRank)
         {
             _tile.Suit.Should().Be(expectedSuit);

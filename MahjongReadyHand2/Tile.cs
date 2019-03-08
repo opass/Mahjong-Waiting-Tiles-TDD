@@ -18,6 +18,8 @@ namespace MahjongReadyHand2
             {"W", Suit.West},
             {"S", Suit.South},
             {"R", Suit.RedDragon},
+            {"G", Suit.GreenDragon},
+            {"Z", Suit.WhiteDragon},
         };
 
         public Tile(string tileString)
@@ -25,7 +27,7 @@ namespace MahjongReadyHand2
             Suit = SuitParsingTable[tileString.Substring(0, 1)];
             if (IsWind())
                 Rank = 0;
-            else if (Suit == Suit.RedDragon)
+            else if (Suit == Suit.RedDragon || Suit == Suit.GreenDragon || Suit == Suit.WhiteDragon)
             {
                 Rank = 0;
             }
@@ -112,6 +114,8 @@ namespace MahjongReadyHand2
         East,
         West,
         South,
-        RedDragon
+        RedDragon,
+        GreenDragon,
+        WhiteDragon
     }
 }
