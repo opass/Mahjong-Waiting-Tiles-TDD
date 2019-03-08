@@ -21,12 +21,7 @@ namespace MahjongReadyHand2
         public Tile(string tileString)
         {
             Suit = SuitParsingTable[tileString.Substring(0, 1)];
-            Rank = IsWindSuit(Suit) ? 0 : int.Parse(tileString.Substring(1, 1));
-        }
-
-        private bool IsWindSuit(Suit suit)
-        {
-            return new [] {Suit.North, Suit.East, Suit.West, Suit.South}.Contains(suit);
+            Rank = IsWind() ? 0 : int.Parse(tileString.Substring(1, 1));
         }
 
         public Tile(Suit suit, int rank)
@@ -94,7 +89,7 @@ namespace MahjongReadyHand2
 
         public bool IsWind()
         {
-            return IsWindSuit(Suit);
+            return new [] {Suit.North, Suit.East, Suit.West, Suit.South}.Contains(Suit);
         }
     }
 
