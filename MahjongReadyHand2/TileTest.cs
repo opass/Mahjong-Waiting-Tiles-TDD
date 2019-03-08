@@ -80,8 +80,15 @@ namespace MahjongReadyHand2
         [TestMethod]
         public void can_create_white_dragon_tile()
         {
-            GivenTile("Z");  // choose Z Because W already been represented by West Wind
+            GivenTile("Z"); // choose Z Because W already been represented by West Wind
             SuitAndRankShouldBe(Suit.WhiteDragon, 0);
+        }
+
+        [TestMethod]
+        public void to_string()
+        {
+            GivenTile("D1");
+            _tile.ToString().Should().Be("D1");
         }
 
         private void SuitAndRankShouldBe(Suit expectedSuit, int expectedRank)

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Linq;
 
 namespace MahjongReadyHand2
 {
@@ -36,6 +37,12 @@ namespace MahjongReadyHand2
 
             Rank = rank;
             Suit = suit;
+        }
+
+        public override string ToString()
+        {
+            var suitPart = SuitParsingTable.FirstOrDefault(kvp => kvp.Value == Suit).Key;
+            return IsNumberTile() ? $"{suitPart}{Rank}" : suitPart;
         }
 
         public int Rank { get; }
