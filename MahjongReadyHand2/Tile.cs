@@ -47,12 +47,6 @@ namespace MahjongReadyHand2
             Suit = suit;
         }
 
-        public Tile(Suit suit)
-        {
-            Suit = suit;
-            if (!IsWind()) throw new ArgumentException();
-        }
-
         public int Rank { get; }
 
         public override bool Equals(object obj)
