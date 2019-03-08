@@ -14,6 +14,7 @@ internal static class PossibleWaitingTilesGenerator
         {
             var tilesAndSibling = new List<Tile> {tile};
 
+            if (tile.IsWind()) return tilesAndSibling;
             if (tile.Rank != 1)
             {
                 tilesAndSibling.Add(tile.PreviousRankTile());

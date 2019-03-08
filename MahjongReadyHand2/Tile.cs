@@ -91,6 +91,11 @@ namespace MahjongReadyHand2
 
             throw new InvalidOperationException();
         }
+
+        public bool IsWind()
+        {
+            return IsWindSuit(Suit);
+        }
     }
 
     public enum Suit
