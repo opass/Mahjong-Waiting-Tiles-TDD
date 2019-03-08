@@ -18,7 +18,7 @@ namespace MahjongReadyHand2
         {
             return new PossibleWaitingTilesGenerator().GetAll(_tiles)
                 .Select(tile =>
-                    (tile: tile, isWinning: new WinningDecider(_tiles.Append(tile)).Check()))
+                    (tile: tile, isWinning: new WinningDecider().Check(_tiles.Append(tile))))
                 .Where(tuple => tuple.isWinning)
                 .Select(tuple => tuple.tile);
         }
@@ -26,17 +26,10 @@ namespace MahjongReadyHand2
 
     public class WinningDecider
     {
-        private readonly IEnumerable<Tile> _tiles;
-
-        public WinningDecider(IEnumerable<Tile> tiles)
+        public bool Check(IEnumerable<Tile> tiles)
         {
-            _tiles = tiles;
-        }
-
-        public bool Check()
-        {
-            return new DistinctTilesTakenEyeGenerator(_tiles).GetAll()
-                .Select(tiles => new ComposedByTripletAndSequenceDecider().Check(tiles))
+            return new DistinctTilesTakenEyeGenerator(tiles).GetAll()
+                .Select(tiles1 => new ComposedByTripletAndSequenceDecider().Check(tiles1))
                 .Any(result => result);
         }
     }
