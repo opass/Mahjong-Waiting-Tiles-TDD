@@ -8,8 +8,9 @@ namespace MahjongReadyHand2
     {
         private static readonly Dictionary<Suit, int> SuitOrder = new Dictionary<Suit, int>
         {
-            {Suit.Dot, 0},
-            {Suit.Bamboo, 1}
+            {Suit.Character, 0},
+            {Suit.Dot, 1},
+            {Suit.Bamboo, 2}
         };
 
         public int Compare(Tile x, Tile y)

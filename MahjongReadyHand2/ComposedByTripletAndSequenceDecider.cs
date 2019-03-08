@@ -15,7 +15,7 @@ namespace MahjongReadyHand2
         {
             InitializeTileCounter(tiles);
 
-            var suits = new[] {Suit.Dot, Suit.Bamboo};
+            var suits = new[] {Suit.Character, Suit.Dot, Suit.Bamboo};
 
             foreach (var suit in suits)
             {
