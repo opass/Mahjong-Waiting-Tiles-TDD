@@ -25,10 +25,18 @@ namespace MahjongReadyHand2
             ShouldGenerateEmptyCollection();
         }
 
-        private void ShouldGenerateEmptyCollection()
+        [TestMethod]
+        public void only_two_same_tiles_should_return_collection_with_one_empty_tiles()
         {
-            var tilesCollection = new DistinctTilesTakenEyeGenerator(_tiles).GetAll();
-            tilesCollection.Should().BeEmpty();
+            GivenTiles("D1,D1");
+            ShouldBeEquivalentToCollection(new[] {Enumerable.Empty<Tile>()});
+        }
+
+        [TestMethod]
+        public void D1114_should_return_collection_with_D14()
+        {
+            GivenTiles("D1,D1,D1,D4");
+            ShouldBeEquivalentToCollection(new[] {TileFactory.CreateTiles("D1,D4")});
         }
 
         private void GivenTiles(string tiles)
@@ -36,11 +44,10 @@ namespace MahjongReadyHand2
             _tiles = TileFactory.CreateTiles(tiles);
         }
 
-        [TestMethod]
-        public void only_two_same_tiles_should_return_collection_with_one_empty_tiles()
+        private void ShouldGenerateEmptyCollection()
         {
-            GivenTiles("D1,D1");
-            ShouldBeEquivalentToCollection(new[] {Enumerable.Empty<Tile>()});
+            var tilesCollection = new DistinctTilesTakenEyeGenerator(_tiles).GetAll();
+            tilesCollection.Should().BeEmpty();
         }
 
         private void ShouldBeEquivalentToCollection(IEnumerable<IEnumerable<Tile>> expectations)
@@ -59,13 +66,6 @@ namespace MahjongReadyHand2
 //            t1.Should().BeEquivalentTo(t2);   // true, order doesn't matter
             var tilesCollection = new DistinctTilesTakenEyeGenerator(_tiles).GetAll();
             tilesCollection.Should().BeEquivalentTo(expectations);
-        }
-
-        [TestMethod]
-        public void D1114_should_return_collection_with_D14()
-        {
-            GivenTiles("D1,D1,D1,D4");
-            ShouldBeEquivalentToCollection(new[] {TileFactory.CreateTiles("D1,D4")});
         }
     }
 }
