@@ -8,9 +8,10 @@ namespace MahjongReadyHand2
         public IEnumerable<Tile> GetAll(IEnumerable<Tile> tiles)
         {
             var enumerable = tiles.ToList();
-            var quadrupletTiles = GetQuadrupletTiles(enumerable);
 
-            return enumerable.Distinct().SelectMany(CreateSelfAndSiblingTiles ).Except(quadrupletTiles);
+            return enumerable.Distinct()
+                .SelectMany(CreateSelfAndSiblingTiles)
+                .Except(GetQuadrupletTiles(enumerable));
         }
 
         private static IEnumerable<Tile> GetQuadrupletTiles(IEnumerable<Tile> enumerable)
