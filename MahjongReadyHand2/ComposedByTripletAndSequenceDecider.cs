@@ -15,13 +15,9 @@ namespace MahjongReadyHand2
         {
             InitializeTileCounter(tiles);
 
-            var windSuits = new[] {Suit.North, Suit.East, Suit.West, Suit.South};
-            foreach (var suit in windSuits)
-            {
-                RemoveAllTripletForWindSuit(suit);
-            }
-                
-            var suits = new[] {Suit.Character, Suit.Dot, Suit.Bamboo};
+            var suits = new[] {
+                Suit.Character, Suit.Dot, Suit.Bamboo,
+                Suit.North, Suit.East, Suit.West, Suit.South};
 
             foreach (var suit in suits)
             {
@@ -29,11 +25,6 @@ namespace MahjongReadyHand2
             }
 
             return IsEmpty();
-        }
-
-        private void RemoveAllTripletForWindSuit(Suit suit)
-        {
-            TryRemoveAllOrNot(TileFactory.CreateTriplet(new Tile(suit)));
         }
 
         private void RemoveAllTripletAndSequenceForSuit(Suit suit)
