@@ -29,17 +29,25 @@ namespace MahjongReadyHand2
 
         private void RemoveAllTripletAndSequenceForSuit(Suit suit)
         {
-            var tryAgain = true;
-            while (TryGetSmallestTileOfSuit(suit, out var tile1) && tryAgain)
+            bool smallestTileCanComposeTripletOrSequence;
+            do
             {
-                var tripletRemoved = TryRemoveAllOrNot(TileFactory.CreateTriplet(tile1));
-                tryAgain = tripletRemoved;
+                if (!TryGetSmallestTileOfSuit(suit, out var smallestTile)) break;
 
-                if (!TryGetSmallestTileOfSuit(suit, out var tile2)) break;
-                if (!TileFactory.TryCreateSequence(tile2, out var sequence)) continue;
-                var sequenceRemoved = TryRemoveAllOrNot(sequence);
-                tryAgain = tripletRemoved || sequenceRemoved;
-            }
+                smallestTileCanComposeTripletOrSequence = TryRemoveSmallestTriplet(smallestTile);
+                smallestTileCanComposeTripletOrSequence |= TryRemoveSmallestSequence(smallestTile);
+
+            } while (smallestTileCanComposeTripletOrSequence);
+        }
+
+        private bool TryRemoveSmallestSequence(Tile smallestTile)
+        {
+            return TileFactory.TryCreateSequence(smallestTile, out var sequence) && TryRemoveAllOrNot(sequence);
+        }
+
+        private bool TryRemoveSmallestTriplet(Tile smallestTile)
+        {
+            return TryRemoveAllOrNot(TileFactory.CreateTriplet(smallestTile));
         }
 
         private bool TryGetSmallestTileOfSuit(Suit suit, out Tile tile)
