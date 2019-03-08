@@ -136,6 +136,13 @@ namespace MahjongReadyHand2
         }
 
         [TestMethod]
+        public void hand_type_D1112345678999_is_waiting_for_all()
+        {
+            GivenHand("D1,D1,D1,D2,D3,D4,D5,D6,D7,D8,D9,D9,D9");
+            WaitingTilesShouldBe("D1,D2,D3,D4,D5,D6,D7,D8,D9");
+        }
+
+        [TestMethod]
         public void hand_type_C111D111B1119_is_waiting_for_B9()
         {
             GivenHand("C1,C1,C1,D1,D1,D1,B1,B1,B1,B9");
