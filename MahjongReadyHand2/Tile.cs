@@ -9,7 +9,8 @@ namespace MahjongReadyHand2
         private Dictionary<string, Suit> _suitParsingTable = new Dictionary<string, Suit>
         {
             {"D", Suit.Dot},
-            {"B", Suit.Bamboo}
+            {"B", Suit.Bamboo},
+            {"C", Suit.Character}
         };
         public Tile(string tileString)
         {
@@ -84,6 +85,7 @@ namespace MahjongReadyHand2
     public enum Suit
     {
         Dot,
-        Bamboo
+        Bamboo,
+        Character
     }
 }

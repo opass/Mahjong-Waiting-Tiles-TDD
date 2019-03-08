@@ -42,6 +42,15 @@ namespace MahjongReadyHand2
             tile1.Suit.Should().Be(Suit.Bamboo);
         }
 
+        [TestMethod]
+        public void can_create_character_tile()
+        {
+            var tile1 = CreateTile("C1");
+
+            tile1.Rank.Should().Be(1);
+            tile1.Suit.Should().Be(Suit.Character);
+        }
+
         private static Tile CreateTile(string tileString)
         {
             return new Tile(tileString);
