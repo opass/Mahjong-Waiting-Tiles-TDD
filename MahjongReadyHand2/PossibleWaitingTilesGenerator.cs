@@ -3,9 +3,9 @@ using System.Linq;
 
 namespace MahjongReadyHand2
 {
-    internal static class PossibleWaitingTilesGenerator
+    internal class PossibleWaitingTilesGenerator
     {
-        public static IEnumerable<Tile> PossibleWaitingTiles(IEnumerable<Tile> tiles)
+        public IEnumerable<Tile> PossibleWaitingTiles(IEnumerable<Tile> tiles)
         {
             var enumerable = tiles.ToList();
             var quadrupletTiles = enumerable.GroupBy(tile => tile).Where(grp => grp.Count() == 4).Select(grp => grp.Key);

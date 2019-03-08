@@ -16,7 +16,7 @@ namespace MahjongReadyHand2
 
         public IEnumerable<Tile> GetWaitingTiles()
         {
-            return PossibleWaitingTilesGenerator.PossibleWaitingTiles(_tiles)
+            return new PossibleWaitingTilesGenerator().PossibleWaitingTiles(_tiles)
                 .Select(tile =>
                     (tile: tile, isWinning: new WinningDecider(_tiles.Append(tile)).Check()))
                 .Where(tuple => tuple.isWinning)
