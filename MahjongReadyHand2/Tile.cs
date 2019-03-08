@@ -25,10 +25,7 @@ namespace MahjongReadyHand2
         public Tile(string tileString)
         {
             Suit = SuitParsingTable[tileString.Substring(0, 1)];
-            if (IsWind() || IsDragon())
-                Rank = 0;
-            else
-                Rank = int.Parse(tileString.Substring(1, 1));
+            Rank = IsNumberTile() ? int.Parse(tileString.Substring(1, 1)) : 0;
         }
 
         public bool IsDragon()
