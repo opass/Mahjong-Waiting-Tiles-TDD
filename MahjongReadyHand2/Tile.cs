@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 
@@ -33,6 +34,12 @@ namespace MahjongReadyHand2
 
             Rank = rank;
             Suit = suit;
+        }
+
+        public Tile(Suit suit)
+        {
+            Suit = suit;
+            if (!IsWind()) throw new ArgumentException();
         }
 
         public int Rank { get; }
