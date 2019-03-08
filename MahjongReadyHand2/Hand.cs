@@ -23,14 +23,4 @@ namespace MahjongReadyHand2
                 .Select(tuple => tuple.tile);
         }
     }
-
-    public class WinningDecider
-    {
-        public bool Check(IEnumerable<Tile> tiles)
-        {
-            return new DistinctTilesTakenEyeGenerator(tiles).GetAll()
-                .Select(tiles1 => new ComposedByTripletAndSequenceDecider().Check(tiles1))
-                .Any(result => result);
-        }
-    }
 }
