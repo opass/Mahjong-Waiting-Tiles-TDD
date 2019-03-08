@@ -17,12 +17,25 @@ namespace MahjongReadyHand2
 
 
             var tryAgain = true;
-            while (TryGetSmallestRankTile(out var tile1) && tryAgain)
+            while (TryGetSmallestDotTile(out var tile1) && tryAgain)
             {
                 var tripletRemoved = TryRemoveAllOrNot(TileFactory.CreateTriplet(tile1));
                 tryAgain = tripletRemoved;
 
-                if (!TryGetSmallestRankTile(out var tile2)) break;
+                if (!TryGetSmallestDotTile(out var tile2)) break;
+                if (!TileFactory.TryCreateSequence(tile2, out var sequence)) continue;
+                var sequenceRemoved = TryRemoveAllOrNot(sequence);
+                tryAgain = tripletRemoved || sequenceRemoved;
+            }
+
+
+            tryAgain = true;
+            while (TryGetSmallestBambooTile(out var tile1) && tryAgain)
+            {
+                var tripletRemoved = TryRemoveAllOrNot(TileFactory.CreateTriplet(tile1));
+                tryAgain = tripletRemoved;
+
+                if (!TryGetSmallestBambooTile(out var tile2)) break;
                 if (!TileFactory.TryCreateSequence(tile2, out var sequence)) continue;
                 var sequenceRemoved = TryRemoveAllOrNot(sequence);
                 tryAgain = tripletRemoved || sequenceRemoved;
@@ -31,11 +44,24 @@ namespace MahjongReadyHand2
             return IsEmpty();
         }
 
-        private bool TryGetSmallestRankTile(out Tile tile)
+        private bool TryGetSmallestBambooTile(out Tile tile)
         {
             try
             {
-                tile = _tileCounter.First().Key;
+                tile = _tileCounter.First(grp => grp.Key.Suit == Suit.Bamboo).Key;
+                return true;
+            }
+            catch
+            {
+                tile = default(Tile);
+                return false;
+            }
+        }
+        private bool TryGetSmallestDotTile(out Tile tile)
+        {
+            try
+            {
+                tile = _tileCounter.First(grp => grp.Key.Suit == Suit.Dot).Key;
                 return true;
             }
             catch
@@ -91,7 +117,7 @@ namespace MahjongReadyHand2
             _tileCounter =
                 new SortedDictionary<Tile, int>(
                     tiles.GroupBy(tile => tile).ToDictionary(grp => grp.Key, grp => grp.Count()),
-                    new TileRankComparer());
+                    new TileConventionComparer());
         }
     }
 }
