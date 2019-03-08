@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
-using System.Linq;
 
 namespace MahjongReadyHand2
 {
@@ -26,11 +25,6 @@ namespace MahjongReadyHand2
         {
             Suit = SuitParsingTable[tileString.Substring(0, 1)];
             Rank = IsNumberTile() ? int.Parse(tileString.Substring(1, 1)) : 0;
-        }
-
-        public bool IsDragon()
-        {
-            return Suit == Suit.RedDragon || Suit == Suit.GreenDragon || Suit == Suit.WhiteDragon;
         }
 
         public Tile(Suit suit, int rank)
@@ -89,11 +83,6 @@ namespace MahjongReadyHand2
             }
 
             throw new InvalidOperationException();
-        }
-
-        public bool IsWind()
-        {
-            return new [] {Suit.North, Suit.East, Suit.West, Suit.South}.Contains(Suit);
         }
 
         public bool IsNumberTile()
