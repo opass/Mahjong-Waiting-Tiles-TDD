@@ -98,6 +98,11 @@ namespace MahjongReadyHand2
         {
             return new [] {Suit.North, Suit.East, Suit.West, Suit.South}.Contains(Suit);
         }
+
+        public bool IsNumberTile()
+        {
+            return Suit == Suit.Bamboo || Suit == Suit.Character || Suit == Suit.Dot;
+        }
     }
 
     public enum Suit

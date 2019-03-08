@@ -23,7 +23,7 @@ namespace MahjongReadyHand2
         {
             var tilesAndSibling = new List<Tile> {self};
 
-            if (self.IsWind() || self.IsDragon()) return tilesAndSibling;
+            if (!self.IsNumberTile()) return tilesAndSibling;
             if (self.Rank != 1)
             {
                 tilesAndSibling.Add(self.PreviousRankTile());
