@@ -30,12 +30,12 @@ namespace MahjongReadyHand2
 
 
             tryAgain = true;
-            while (TryGetSmallestBambooTile(out var tile1) && tryAgain)
+            while (TryGetSmallestTileOfSuit(Suit.Bamboo, out var tile1) && tryAgain)
             {
                 var tripletRemoved = TryRemoveAllOrNot(TileFactory.CreateTriplet(tile1));
                 tryAgain = tripletRemoved;
 
-                if (!TryGetSmallestBambooTile(out var tile2)) break;
+                if (!TryGetSmallestTileOfSuit(Suit.Bamboo, out var tile2)) break;
                 if (!TileFactory.TryCreateSequence(tile2, out var sequence)) continue;
                 var sequenceRemoved = TryRemoveAllOrNot(sequence);
                 tryAgain = tripletRemoved || sequenceRemoved;
@@ -44,11 +44,11 @@ namespace MahjongReadyHand2
             return IsEmpty();
         }
 
-        private bool TryGetSmallestBambooTile(out Tile tile)
+        private bool TryGetSmallestTileOfSuit(Suit suit, out Tile tile)
         {
             try
             {
-                tile = _tileCounter.First(grp => grp.Key.Suit == Suit.Bamboo).Key;
+                tile = _tileCounter.First(grp => grp.Key.Suit == suit).Key;
                 return true;
             }
             catch
@@ -57,6 +57,7 @@ namespace MahjongReadyHand2
                 return false;
             }
         }
+
         private bool TryGetSmallestDotTile(out Tile tile)
         {
             try
