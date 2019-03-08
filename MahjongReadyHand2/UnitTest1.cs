@@ -150,17 +150,24 @@ namespace MahjongReadyHand2
         }
 
         [TestMethod]
-        public void hand_type_D111N_is_waiting_for_N()
-        {
-            GivenHand("D1,D1,D1,N");
-            WaitingTilesShouldBe("N");
-        }
-
-        [TestMethod]
         public void hand_type_D1NNN_is_waiting_for_D1()
         {
             GivenHand("D1,N,N,N");
             WaitingTilesShouldBe("D1");
+        }
+
+        [TestMethod]
+        public void hand_type_D11NN_is_waiting_for_D1N()
+        {
+            GivenHand("D1,D1,N,N");
+            WaitingTilesShouldBe("D1,N");
+        }
+
+        [TestMethod]
+        public void hand_type_D111NEEE_is_waiting_for_N()
+        {
+            GivenHand("D1,D1,D1,N,E,E,E");
+            WaitingTilesShouldBe("N");
         }
 
 
