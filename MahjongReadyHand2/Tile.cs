@@ -17,12 +17,20 @@ namespace MahjongReadyHand2
             {"E", Suit.East},
             {"W", Suit.West},
             {"S", Suit.South},
+            {"R", Suit.RedDragon},
         };
 
         public Tile(string tileString)
         {
             Suit = SuitParsingTable[tileString.Substring(0, 1)];
-            Rank = IsWind() ? 0 : int.Parse(tileString.Substring(1, 1));
+            if (IsWind())
+                Rank = 0;
+            else if (Suit == Suit.RedDragon)
+            {
+                Rank = 0;
+            }
+            else
+                Rank = int.Parse(tileString.Substring(1, 1));
         }
 
         public Tile(Suit suit, int rank)
@@ -103,6 +111,7 @@ namespace MahjongReadyHand2
         North,
         East,
         West,
-        South
+        South,
+        RedDragon
     }
 }

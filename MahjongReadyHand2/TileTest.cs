@@ -55,12 +55,19 @@ namespace MahjongReadyHand2
 
             GivenTile("E");
             SuitAndRankShouldBe(Suit.East, 0);
-            
+
             GivenTile("W");
             SuitAndRankShouldBe(Suit.West, 0);
-            
+
             GivenTile("S");
             SuitAndRankShouldBe(Suit.South, 0);
+        }
+
+        [TestMethod]
+        public void can_create_red_dragon_tile()
+        {
+            GivenTile("R");
+            SuitAndRankShouldBe(Suit.RedDragon, 0);
         }
 
         private void SuitAndRankShouldBe(Suit expectedSuit, int expectedRank)
