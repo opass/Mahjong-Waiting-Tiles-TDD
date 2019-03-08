@@ -31,7 +31,7 @@ namespace MahjongReadyHand2
                 Rank = int.Parse(tileString.Substring(1, 1));
         }
 
-        private bool IsDragon()
+        public bool IsDragon()
         {
             return Suit == Suit.RedDragon || Suit == Suit.GreenDragon || Suit == Suit.WhiteDragon;
         }

@@ -17,7 +17,9 @@ namespace MahjongReadyHand2
 
             var suits = new[] {
                 Suit.Character, Suit.Dot, Suit.Bamboo,
-                Suit.North, Suit.East, Suit.West, Suit.South};
+                Suit.North, Suit.East, Suit.West, Suit.South,
+                Suit.RedDragon, Suit.GreenDragon, Suit.WhiteDragon
+            };
 
             foreach (var suit in suits)
             {

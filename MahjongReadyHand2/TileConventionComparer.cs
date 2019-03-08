@@ -15,6 +15,9 @@ namespace MahjongReadyHand2
             {Suit.South, 4},
             {Suit.West, 5},
             {Suit.North, 6},
+            {Suit.RedDragon, 7},
+            {Suit.GreenDragon, 8},
+            {Suit.WhiteDragon, 9},
         };
 
         public int Compare(Tile x, Tile y)
