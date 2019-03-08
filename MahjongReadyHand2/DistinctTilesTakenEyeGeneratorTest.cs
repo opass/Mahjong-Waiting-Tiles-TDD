@@ -40,12 +40,13 @@ namespace MahjongReadyHand2
         public void only_two_same_tiles_should_return_collection_with_one_empty_tiles()
         {
             GivenTiles("D1,D1");
+            ShouldBeEquivalentToCollection(new[] {Enumerable.Empty<Tile>()});
+        }
+
+        private void ShouldBeEquivalentToCollection(IEnumerable<IEnumerable<Tile>> expectations)
+        {
             var tilesCollection = new DistinctTilesTakenEyeGenerator(_tiles).GetAll();
-            var collection = tilesCollection as IEnumerable<Tile>[] ?? tilesCollection.ToArray();
-            collection.Should().BeEquivalentTo(new[]
-            {
-                Enumerable.Empty<Tile>()
-            });
+            tilesCollection.Should().BeEquivalentTo(expectations);
         }
 
         [TestMethod]
