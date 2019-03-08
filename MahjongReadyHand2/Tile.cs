@@ -6,7 +6,7 @@ namespace MahjongReadyHand2
 {
     public class Tile
     {
-        private Dictionary<string, Suit> _suitParsingTable = new Dictionary<string, Suit>
+        private static readonly Dictionary<string, Suit> SuitParsingTable = new Dictionary<string, Suit>
         {
             {"D", Suit.Dot},
             {"B", Suit.Bamboo},
@@ -14,7 +14,7 @@ namespace MahjongReadyHand2
         };
         public Tile(string tileString)
         {
-            Suit = _suitParsingTable[tileString.Substring(0, 1)];
+            Suit = SuitParsingTable[tileString.Substring(0, 1)];
             Rank = int.Parse(tileString.Substring(1, 1));
         }
 
