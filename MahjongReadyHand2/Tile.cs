@@ -71,11 +71,6 @@ namespace MahjongReadyHand2
 
         public Suit Suit { get; }
 
-        public virtual bool IsValid()
-        {
-            return false;
-        }
-
         public Tile PreviousRankTile()
         {
             var nextRank = Rank - 1;

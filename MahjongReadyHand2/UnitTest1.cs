@@ -149,7 +149,6 @@ namespace MahjongReadyHand2
             WaitingTilesShouldBe("B9");
         }
 
-//        [Ignore]
         [TestMethod]
         public void hand_type_D111N_is_waiting_for_N()
         {
