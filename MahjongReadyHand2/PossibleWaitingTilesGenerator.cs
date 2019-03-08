@@ -5,7 +5,7 @@ namespace MahjongReadyHand2
 {
     internal class PossibleWaitingTilesGenerator
     {
-        public IEnumerable<Tile> PossibleWaitingTiles(IEnumerable<Tile> tiles)
+        public IEnumerable<Tile> GetAll(IEnumerable<Tile> tiles)
         {
             var enumerable = tiles.ToList();
             var quadrupletTiles = enumerable.GroupBy(tile => tile).Where(grp => grp.Count() == 4).Select(grp => grp.Key);

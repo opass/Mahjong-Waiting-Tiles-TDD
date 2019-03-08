@@ -19,7 +19,7 @@ namespace MahjongReadyHand2
 
         private static IEnumerable<Tile> CalculatePossibleWaitingTiles(IEnumerable<Tile> tiles)
         {
-            return new PossibleWaitingTilesGenerator().PossibleWaitingTiles(tiles);
+            return new PossibleWaitingTilesGenerator().GetAll(tiles);
         }
 
         [TestMethod]
