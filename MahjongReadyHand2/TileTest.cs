@@ -88,7 +88,12 @@ namespace MahjongReadyHand2
         public void to_string()
         {
             GivenTile("D1");
-            _tile.ToString().Should().Be("D1");
+            ToStringShouldBe("D1");
+        }
+
+        private void ToStringShouldBe(string expected)
+        {
+            _tile.ToString().Should().Be(expected);
         }
 
         private void SuitAndRankShouldBe(Suit expectedSuit, int expectedRank)
