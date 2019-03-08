@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
@@ -17,17 +18,17 @@ namespace MahjongReadyHand2
             ShouldGenerateEmptyCollection();
         }
 
-        private void ShouldGenerateEmptyCollection()
-        {
-            var tilesCollection = new DistinctTilesTakenEyeGenerator(_tiles).GetAll();
-            tilesCollection.Should().BeEmpty();
-        }
-
         [TestMethod]
         public void tiles_without_eyes_return_empty_collection()
         {
             GivenTiles("D1,D2,D3");
             ShouldGenerateEmptyCollection();
+        }
+
+        private void ShouldGenerateEmptyCollection()
+        {
+            var tilesCollection = new DistinctTilesTakenEyeGenerator(_tiles).GetAll();
+            tilesCollection.Should().BeEmpty();
         }
 
         private void GivenTiles(string tiles)
@@ -41,8 +42,10 @@ namespace MahjongReadyHand2
             GivenTiles("D1,D1");
             var tilesCollection = new DistinctTilesTakenEyeGenerator(_tiles).GetAll();
             var collection = tilesCollection as IEnumerable<Tile>[] ?? tilesCollection.ToArray();
-            collection.Should().ContainSingle();
-            collection.Single().Should().BeEmpty();
+            collection.Should().BeEquivalentTo(new[]
+            {
+                Enumerable.Empty<Tile>()
+            });
         }
 
         [TestMethod]
