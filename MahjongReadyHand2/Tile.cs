@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace MahjongReadyHand2
 {
@@ -10,12 +11,22 @@ namespace MahjongReadyHand2
         {
             {"D", Suit.Dot},
             {"B", Suit.Bamboo},
-            {"C", Suit.Character}
+            {"C", Suit.Character},
+            {"N", Suit.North},
+            {"E", Suit.East},
+            {"W", Suit.West},
+            {"S", Suit.South},
         };
+
         public Tile(string tileString)
         {
             Suit = SuitParsingTable[tileString.Substring(0, 1)];
-            Rank = int.Parse(tileString.Substring(1, 1));
+            Rank = IsWindSuit(Suit) ? 0 : int.Parse(tileString.Substring(1, 1));
+        }
+
+        private bool IsWindSuit(Suit suit)
+        {
+            return new [] {Suit.North, Suit.East, Suit.West, Suit.South}.Contains(suit);
         }
 
         public Tile(Suit suit, int rank)
@@ -24,7 +35,7 @@ namespace MahjongReadyHand2
             {
                 throw new ArgumentException("Rank should be between 1 to 9");
             }
-            
+
             Rank = rank;
             Suit = suit;
         }
@@ -86,6 +97,10 @@ namespace MahjongReadyHand2
     {
         Dot,
         Bamboo,
-        Character
+        Character,
+        North,
+        East,
+        West,
+        South
     }
 }
