@@ -8,6 +8,8 @@ namespace MahjongReadyHand2
     [TestClass]
     public class DistinctTilesTakenEyeGeneratorTest
     {
+        private IEnumerable<Tile> _tiles;
+
         [TestMethod]
         public void no_tiles_return_empty_collection()
         {
@@ -18,14 +20,14 @@ namespace MahjongReadyHand2
         [TestMethod]
         public void tiles_without_eyes_return_empty_collection()
         {
-            var tiles = new[]
-            {
-                new Tile("D1"),
-                new Tile("D2"),
-                new Tile("D3"),
-            };
-            var tilesCollection = new DistinctTilesTakenEyeGenerator(tiles).GetAll();
+            GivenTiles("D1,D2,D3");
+            var tilesCollection = new DistinctTilesTakenEyeGenerator(_tiles).GetAll();
             tilesCollection.Should().BeEmpty();
+        }
+
+        private void GivenTiles(string tiles)
+        {
+            _tiles = TileFactory.CreateTiles(tiles);
         }
 
         [TestMethod]
@@ -58,5 +60,7 @@ namespace MahjongReadyHand2
             collection.Should().ContainSingle();
             collection.Single().Should().BeEquivalentTo(new Tile("D1"), new Tile("D4"));
         }
+        
+        
     }
 }
