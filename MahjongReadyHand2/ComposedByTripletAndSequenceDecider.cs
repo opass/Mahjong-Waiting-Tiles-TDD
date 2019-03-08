@@ -15,33 +15,29 @@ namespace MahjongReadyHand2
         {
             InitializeTileCounter(tiles);
 
+            var suits = new[] {Suit.Dot, Suit.Bamboo};
 
-            var tryAgain = true;
-            while (TryGetSmallestTileOfSuit(Suit.Dot, out var tile1) && tryAgain)
+            foreach (var suit in suits)
             {
-                var tripletRemoved = TryRemoveAllOrNot(TileFactory.CreateTriplet(tile1));
-                tryAgain = tripletRemoved;
-
-                if (!TryGetSmallestTileOfSuit(Suit.Dot, out var tile2)) break;
-                if (!TileFactory.TryCreateSequence(tile2, out var sequence)) continue;
-                var sequenceRemoved = TryRemoveAllOrNot(sequence);
-                tryAgain = tripletRemoved || sequenceRemoved;
-            }
-
-
-            tryAgain = true;
-            while (TryGetSmallestTileOfSuit(Suit.Bamboo, out var tile1) && tryAgain)
-            {
-                var tripletRemoved = TryRemoveAllOrNot(TileFactory.CreateTriplet(tile1));
-                tryAgain = tripletRemoved;
-
-                if (!TryGetSmallestTileOfSuit(Suit.Bamboo, out var tile2)) break;
-                if (!TileFactory.TryCreateSequence(tile2, out var sequence)) continue;
-                var sequenceRemoved = TryRemoveAllOrNot(sequence);
-                tryAgain = tripletRemoved || sequenceRemoved;
+                RemoveAllTripletAndSequenceForSuit(suit);
             }
 
             return IsEmpty();
+        }
+
+        private void RemoveAllTripletAndSequenceForSuit(Suit suit)
+        {
+            var tryAgain = true;
+            while (TryGetSmallestTileOfSuit(suit, out var tile1) && tryAgain)
+            {
+                var tripletRemoved = TryRemoveAllOrNot(TileFactory.CreateTriplet(tile1));
+                tryAgain = tripletRemoved;
+
+                if (!TryGetSmallestTileOfSuit(suit, out var tile2)) break;
+                if (!TileFactory.TryCreateSequence(tile2, out var sequence)) continue;
+                var sequenceRemoved = TryRemoveAllOrNot(sequence);
+                tryAgain = tripletRemoved || sequenceRemoved;
+            }
         }
 
         private bool TryGetSmallestTileOfSuit(Suit suit, out Tile tile)
