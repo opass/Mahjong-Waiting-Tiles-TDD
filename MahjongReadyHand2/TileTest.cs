@@ -29,28 +29,22 @@ namespace MahjongReadyHand2
         [TestMethod]
         public void different_suit_tiles_are_not_equal()
         {
-            var tile1 = CreateTile("D1");
-            var tile2 = CreateTile("B1");
-
-            tile1.Should().NotBe(tile2, "because they are different tile");
+            GivenTile("D1");
+            SuitAndRankShouldBe(Suit.Dot, 1);
         }
 
         [TestMethod]
         public void can_create_bamboo_tile()
         {
-            var tile1 = CreateTile("B1");
-
-            tile1.Rank.Should().Be(1);
-            tile1.Suit.Should().Be(Suit.Bamboo);
+            GivenTile("B1");
+            SuitAndRankShouldBe(Suit.Bamboo, 1);
         }
 
         [TestMethod]
         public void can_create_character_tile()
         {
-            var tile1 = CreateTile("C1");
-
-            tile1.Rank.Should().Be(1);
-            tile1.Suit.Should().Be(Suit.Character);
+            GivenTile("C1");
+            SuitAndRankShouldBe(Suit.Character, 1);
         }
 
         [TestMethod]
