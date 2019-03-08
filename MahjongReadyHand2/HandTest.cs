@@ -177,6 +177,13 @@ namespace MahjongReadyHand2
             WaitingTilesShouldBe("G");
         }
 
+        [TestMethod]
+        public void hand_type_to_string_is_following_convention_order()
+        {
+            GivenHand("N,E,W,S,R,G,Z,B9,B3,B1,C2,C3,D6");
+            _hand.ToString().Should().Be("C2,C3,D6,B1,B3,B9,E,S,W,N,R,G,Z");
+        }
+
 
         private void WaitingTilesShouldBe(string tilesString)
         {
