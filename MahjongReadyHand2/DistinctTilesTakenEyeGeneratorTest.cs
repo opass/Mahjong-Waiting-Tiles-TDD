@@ -45,6 +45,18 @@ namespace MahjongReadyHand2
 
         private void ShouldBeEquivalentToCollection(IEnumerable<IEnumerable<Tile>> expectations)
         {
+//            example:
+//            var t1 = new []
+//            {
+//                new [] {1,2,3},
+//                new [] {4,5,6}
+//            };
+//            var t2 = new []
+//            {
+//                new [] {4,5,6},
+//                new [] {1,3,2}
+//            };
+//            t1.Should().BeEquivalentTo(t2);   // true, order doesn't matter
             var tilesCollection = new DistinctTilesTakenEyeGenerator(_tiles).GetAll();
             tilesCollection.Should().BeEquivalentTo(expectations);
         }
@@ -53,10 +65,7 @@ namespace MahjongReadyHand2
         public void D1114_should_return_collection_with_D14()
         {
             GivenTiles("D1,D1,D1,D4");
-            var tilesCollection = new DistinctTilesTakenEyeGenerator(_tiles).GetAll();
-            var collection = tilesCollection as IEnumerable<Tile>[] ?? tilesCollection.ToArray();
-            collection.Should().ContainSingle();
-            collection.Single().Should().BeEquivalentTo(new Tile("D1"), new Tile("D4"));
+            ShouldBeEquivalentToCollection(new[] {TileFactory.CreateTiles("D1,D4")});
         }
     }
 }
