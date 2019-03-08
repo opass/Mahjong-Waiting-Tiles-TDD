@@ -16,10 +16,19 @@ namespace MahjongReadyHand2
         }
 
         [TestMethod]
-        public void different_tiles_are_not_equal()
+        public void different_rank_tiles_are_not_equal()
         {
             var tile1 = CreateTile("D1");
             var tile2 = CreateTile("D2");
+
+            tile1.Should().NotBe(tile2, "because they are different tile");
+        }
+
+        [TestMethod]
+        public void different_suit_tiles_are_not_equal()
+        {
+            var tile1 = CreateTile("D1");
+            var tile2 = CreateTile("B1");
 
             tile1.Should().NotBe(tile2, "because they are different tile");
         }
