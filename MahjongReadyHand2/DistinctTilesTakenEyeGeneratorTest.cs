@@ -14,6 +14,11 @@ namespace MahjongReadyHand2
         public void no_tiles_return_empty_collection()
         {
             GivenTiles("");
+            ShouldGenerateEmptyCollection();
+        }
+
+        private void ShouldGenerateEmptyCollection()
+        {
             var tilesCollection = new DistinctTilesTakenEyeGenerator(_tiles).GetAll();
             tilesCollection.Should().BeEmpty();
         }
@@ -22,8 +27,7 @@ namespace MahjongReadyHand2
         public void tiles_without_eyes_return_empty_collection()
         {
             GivenTiles("D1,D2,D3");
-            var tilesCollection = new DistinctTilesTakenEyeGenerator(_tiles).GetAll();
-            tilesCollection.Should().BeEmpty();
+            ShouldGenerateEmptyCollection();
         }
 
         private void GivenTiles(string tiles)
